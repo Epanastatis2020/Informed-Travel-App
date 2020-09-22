@@ -19,6 +19,20 @@
 //data[1].sunset (sunset time HH:MM)
 //data[1].snow (snowfall)
 
+
+// NewsAPI
+
+// https://newsapi.org/v2/top-headlines?country=au&q=covid
+
+// articles[i].source.name (article source)
+// articles[i].title (article title)
+// articles[i].description (article summary)
+// articles[i].url (article URL)
+// articles[i].urlToImage (article image URL)
+// articles[i].publishedAt (article date)
+// articles[i].content (first part of article)
+
+
 //Crafting a query
 
 let weatherAPI = "https://api.weatherbit.io/v2.0/current?";
