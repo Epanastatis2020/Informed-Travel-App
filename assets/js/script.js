@@ -19,7 +19,6 @@
 //data[1].sunset (sunset time HH:MM)
 //data[1].snow (snowfall)
 
-
 // NewsAPI
 
 // https://newsapi.org/v2/top-headlines?country=au&q=covid
@@ -31,7 +30,6 @@
 // articles[i].urlToImage (article image URL)
 // articles[i].publishedAt (article date)
 // articles[i].content (first part of article)
-
 
 //Crafting a query
 
