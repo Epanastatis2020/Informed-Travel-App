@@ -16,3 +16,17 @@
 //data[1].aqi (air quality)
 //data[1].precip (rain)
 //data[1].sunrise
+
+
+
+// NewsAPI
+
+// https://newsapi.org/v2/top-headlines?country=au&q=covid
+
+// articles[i].source.name (article source)
+// articles[i].title (article title)
+// articles[i].description (article summary)
+// articles[i].url (article URL)
+// articles[i].urlToImage (article image URL)
+// articles[i].publishedAt (article date)
+// articles[i].content (first part of article)
