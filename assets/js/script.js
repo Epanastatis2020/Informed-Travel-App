@@ -18,3 +18,19 @@
 //data[1].sunrise (sunrise time HH:MM)
 //data[1].sunset (sunset time HH:MM)
 //data[1].snow (snowfall)
+
+//Crafting a query
+
+let weatherAPI =  "https://api.weatherbit.io/v2.0/current?"
+let APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee"
+
+let query = "Athens"
+
+let queryURL = weatherAPI + query + APIkey;
+
+$.ajax({
+    url: queryURL;
+    method: "GET",
+}).then(function (response) {
+    console.log(response);
+})
