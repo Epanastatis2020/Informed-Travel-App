@@ -36,7 +36,7 @@
 let weatherAPI = "https://api.weatherbit.io/v2.0/current?";
 let APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee";
 
-let query = prompt("Which city would you like to visit?");
+//let query = prompt("Which city would you like to visit?");
 
 let queryURL = weatherAPI + query + APIkey;
 
