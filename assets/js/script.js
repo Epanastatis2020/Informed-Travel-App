@@ -43,32 +43,49 @@ $.ajax({
   url: queryURL,
   method: "GET",
 }).then(function (response) {
-  let forecastDate = response.data[0].valid_date;
-  let localMinTemp = response.data[0].min_temp;
-  let localMaxTemp = response.data[0].max_temp;
-  let forecastIcon = response.data[0].weather.icon;
-  let forecastIconURL = weatherImageURL + forecastIcon + ".png";
-  let forecastDescription = response.data[0].weather.description;
+  let forecasted = response;
+  let cardsArray = [];
+  for (let i = 0; i < 4; i++) {
+    let forecastDate = forecasted.data[i].valid_date;
+    let localMinTemp = forecasted.data[i].min_temp;
+    let localMaxTemp = forecasted.data[i].max_temp;
+    let forecastIcon = forecasted.data[i].weather.icon;
+    let forecastIconURL = weatherImageURL + forecastIcon + ".png";
+    let forecastDescription = forecasted.data[i].weather.description;
 
-  let newDiv = $("<div>").attr("id", "weatherDiv");
-  let dateP = $("<p>")
-    .attr("id", "forecastDate")
-    .text("date " + forecastDate);
-  let mintempP = $("<p>")
-    .attr("id", "localMinTemp")
-    .text("min temp " + localMinTemp);
-  let maxtempP = $("<p>")
-    .attr("id", "localMaxTemp")
-    .text("max temp " + localMaxTemp);
-  let descP = $("<p>").attr("id", "description").text(forecastDescription);
-  let newIMG = $("<img>")
-    .attr("src", forecastIconURL)
-    .attr("id", "weatherIcon");
+    let newCard = $("<div>").attr("class", "card-body");
+    let dateP = $("<h5>")
+      .attr("id", "forecastDate")
+      .text("date " + forecastDate)
+      .attr("class", "card-title");
+    let mintempP = $("<p>")
+      .attr("id", "localMinTemp")
+      .attr("class", "card-text")
+      .text("min temp " + localMinTemp);
+    let maxtempP = $("<p>")
+      .attr("id", "localMaxTemp")
+      .attr("class", "card-text")
+      .text("max temp " + localMaxTemp);
+    let descP = $("<p>")
+      .attr("id", "description")
+      .attr("class", "card-text")
+      .text(forecastDescription);
+    let newIMG = $("<img>")
+      .attr("src", forecastIconURL)
+      .attr("id", "weatherIcon")
+      .attr("alt", "Icon representing current weather conditions");
 
-  newDiv.append(dateP);
-  newDiv.append(mintempP);
-  newDiv.append(maxtempP);
-  newDiv.append(descP);
-  newDiv.append(newIMG);
+    newCard.append(dateP);
+    newCard.append(mintempP);
+    newCard.append(maxtempP);
+    newCard.append(descP);
+    newCard.append(newIMG);
+    cardsArray.push(newCard);
+  }
+
+  let newDiv = $("<div>")
+    .attr("id", "weatherDiv")
+    .attr("class", "card text-white bg-info");
+  newDiv.append(cardsArray);
   $("body").append(newDiv);
 });
