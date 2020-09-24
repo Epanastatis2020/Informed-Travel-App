@@ -10,49 +10,49 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
 
+  <!-- Font Awesome Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Optional CSS-->
   <link rel="stylesheet" href="assets/css/style.css" />
-  <title>Informed Travel</title>
+  <title>Informed Traveler App</title>
 </head>
 
 <body>
 
 
   <!-- Navbar -->
-  <ul class="nav nav-pills nav-fill">
+  <ul class="nav nav-pills nav-fill" id="navbar">
+    <i class="fa fa-newspaper-o" style="font-size:48px"></i>
     <li class="nav-item">
-      <a class="nav-link active" href="#">Active</a>
+      <a class="nav-link" href="#">Headlines</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Much longer nav link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button type="button" class="btn btn-dark">+</button>
+    </form>
   </ul>
 
   <!-- First Container for Weather -->
-  <div class="container-fluid">
-    <div class="container-sm">100% wide until small breakpoint</div>
-    <div class="container-sm">100% wide until small breakpoint</div>
-    <div class="container-sm">100% wide until small breakpoint</div>
-    <div class="container-sm">100% wide until small breakpoint</div>
-    <div class="container-sm">100% wide until small breakpoint</div>
+  <h1>Town, State/Country</h1>
+  <div class="container-fluid" id="weathercontainer">
+    <div class="container-sm" id="currentdayweather">Today's Weather</div>
+    <div class="container-sm" id="daytwo">Day Two</div>
+    <div class="container-sm" id="daythree">Day Three</div>
+    <div class="container-sm" id="dayfour">Day Four</div>
+
     ...
   </div>
 
   <!-- Second Container for News -->
-  <div class="container-fluid">
+  <h1>Top Stories</h1>
+  <div class="container-fluid" id="newscontainer">
     ...
     <!-- Media List For Top Stories -->
     <ul class="list-unstyled">
       <li class="media">
         <img src="..." class="mr-3" alt="...">
         <div class="media-body">
-          <h5 class="mt-0 mb-1">List-based media object</h5>
+          <h5 class="mt-0 mb-1">News Article 1</h5>
           Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
           vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
           lacinia congue felis in faucibus.
@@ -61,7 +61,7 @@
       <li class="media my-4">
         <img src="..." class="mr-3" alt="...">
         <div class="media-body">
-          <h5 class="mt-0 mb-1">List-based media object</h5>
+          <h5 class="mt-0 mb-1">News Article 2</h5>
           Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
           vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
           lacinia congue felis in faucibus.
@@ -70,7 +70,7 @@
       <li class="media">
         <img src="..." class="mr-3" alt="...">
         <div class="media-body">
-          <h5 class="mt-0 mb-1">List-based media object</h5>
+          <h5 class="mt-0 mb-1">News Article 3</h5>
           Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
           vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
           lacinia congue felis in faucibus.

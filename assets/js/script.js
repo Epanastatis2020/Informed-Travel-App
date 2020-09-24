@@ -14,10 +14,10 @@ const APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee";
 let input = prompt("Which city would you like to visit?");
 let query = "city=" + input;
 let forecastRange = "&days=4";
-const queryURL = weatherAPI + query + forecastRange + APIkey;
+const queryWeatherURL = weatherAPI + query + forecastRange + APIkey;
 
 $.ajax({
-  url: queryURL,
+  url: queryWeatherURL,
   method: "GET",
 }).then(function (response) {
   let forecasted = response;
