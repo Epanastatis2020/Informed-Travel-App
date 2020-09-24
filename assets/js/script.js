@@ -39,6 +39,7 @@ function getWeather() {
       let forecastIcon = forecasted.data[i].weather.icon;
       let forecastIconURL = weatherImageURL + forecastIcon + ".png";
       let forecastDescription = forecasted.data[i].weather.description;
+      let catchCountry = forecasted.country_code;
 
       let newCard = $("<div>").attr("class", "col-md-3");
       let dateP = $("<h5>")
@@ -73,24 +74,28 @@ function getWeather() {
     let weatherRow = $("<div>").attr("class", "row");
     weatherRow.append(cardsArray);
     $("#weathercontainer").append(weatherRow);
+
+    getNews(catchCountry);
   });
 }
 
 // Ajax call to GNews API. Response will be an object with an array of articles.
-$.ajax({
-  type: "GET",
-  url: newsQueryURL,
-  success: function (response) {
-    // Get the array of returned articles from the response.
-    let arrArticles = response.articles;
+function getNews(catchCountry) {
+  $.ajax({
+    type: "GET",
+    url: newsQueryURL,
+    success: function (response) {
+      // Get the array of returned articles from the response.
+      let arrArticles = response.articles;
 
-    // Loop through the array and call renderArticle to display the each one.
-    arrArticles.forEach((article) => {
-      //console.log(article);
-      renderArticle(article);
-    });
-  },
-});
+      // Loop through the array and call renderArticle to display the each one.
+      arrArticles.forEach((article) => {
+        //console.log(article);
+        renderArticle(article);
+      });
+    },
+  });
+}
 
 function renderArticle(objArticle) {
   // Take the object that's been passed to the function and create some string variables.
