@@ -1,17 +1,5 @@
-// NewsAPI
-
-let newsAPIKey = "0e966fb836610aa7a1a213a0b9d61c6b";
-let countryCode = "au";
-let newsQueryURL = `https://gnews.io/api/v4/top-headlines?country=${countryCode}&max=5&token=${newsAPIKey}`;
-
-//Capturing weather information
-
-const weatherImageURL = "https://www.weatherbit.io/static/img/icons/";
-const weatherAPI = "https://api.weatherbit.io/v2.0/forecast/daily?";
-const APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee";
-let forecastRange = "&days=4";
-
 // Calling the weather API
+
 $(document).ready(function () {
   $("#userInputForm").submit(function (event) {
     event.preventDefault();
@@ -20,7 +8,16 @@ $(document).ready(function () {
 });
 
 function getWeather() {
+  //Preparing the weather div container
+
   $("#weathercontainer").empty();
+
+  //Capturing weather information
+
+  const weatherImageURL = "https://www.weatherbit.io/static/img/icons/";
+  const weatherAPI = "https://api.weatherbit.io/v2.0/forecast/daily?";
+  const APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee";
+  let forecastRange = "&days=4";
   let input = $("#userInput").val();
   let query = "city=" + input;
   const queryWeatherURL = weatherAPI + query + forecastRange + APIkey;
@@ -30,7 +27,9 @@ function getWeather() {
     method: "GET",
   }).then(function (response) {
     let forecasted = response;
+
     // Looping through the array and creating elements for each instance (i.e. day)
+
     let cardsArray = [];
     for (let i = 0; i < 4; i++) {
       let forecastDate = forecasted.data[i].valid_date;
@@ -81,6 +80,10 @@ function getWeather() {
 
 // Ajax call to GNews API. Response will be an object with an array of articles.
 function getNews(catchCountry) {
+  // NewsAPI
+  let newsAPIKey = "0e966fb836610aa7a1a213a0b9d61c6b";
+  let newsQueryURL = `https://gnews.io/api/v4/top-headlines?country=${catchCountry}&max=5&token=${newsAPIKey}`;
+
   $.ajax({
     type: "GET",
     url: newsQueryURL,
@@ -90,7 +93,6 @@ function getNews(catchCountry) {
 
       // Loop through the array and call renderArticle to display the each one.
       arrArticles.forEach((article) => {
-        //console.log(article);
         renderArticle(article);
       });
     },
@@ -104,8 +106,6 @@ function renderArticle(objArticle) {
   let strURL = objArticle.url;
   let strImageURL = objArticle.image;
   let strSource = objArticle.source.name;
-
-  //console.log(strTitle + strDescription + strURL + strImageURL + strSource);
 
   // Build a new list item to render.
   let newLI = $("<li>").addClass("media");
