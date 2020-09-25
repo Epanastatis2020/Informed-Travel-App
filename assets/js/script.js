@@ -1,87 +1,87 @@
 // NewsAPI
 
-let strNewsAPIKey = "0e966fb836610aa7a1a213a0b9d61c6b";
-let strCountryCode = "au";
-let newsQueryURL = `https://gnews.io/api/v4/top-headlines?country=${countryCode}&max=5&token=${newsAPIKey}`;
+// let strNewsAPIKey = "0e966fb836610aa7a1a213a0b9d61c6b";
+// let strCountryCode = "au";
+// let newsQueryURL = `https://gnews.io/api/v4/top-headlines?country=${countryCode}&max=5&token=${newsAPIKey}`;
 
 //Global variables
 let searchCountry;
 
 //Capturing weather information
-const weatherImageURL = "https://www.weatherbit.io/static/img/icons/";
-const weatherAPI = "https://api.weatherbit.io/v2.0/forecast/daily?";
-const APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee";
-let input = prompt("Which city would you like to visit?");
-let query = "city=" + input;
-let forecastRange = "&days=4";
-const queryWeatherURL = weatherAPI + query + forecastRange + APIkey;
+// const weatherImageURL = "https://www.weatherbit.io/static/img/icons/";
+// const weatherAPI = "https://api.weatherbit.io/v2.0/forecast/daily?";
+// const APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee";
+// let input = prompt("Which city would you like to visit?");
+// let query = "city=" + input;
+// let forecastRange = "&days=4";
+// const queryWeatherURL = weatherAPI + query + forecastRange + APIkey;
 
-$.ajax({
-  url: queryWeatherURL,
-  method: "GET",
-}).then(function (response) {
-  let forecasted = response;
-  let cardsArray = [];
-  for (let i = 0; i < 4; i++) {
-    let forecastDate = forecasted.data[i].valid_date;
-    let localMinTemp = forecasted.data[i].min_temp;
-    let localMaxTemp = forecasted.data[i].max_temp;
-    let forecastIcon = forecasted.data[i].weather.icon;
-    let forecastIconURL = weatherImageURL + forecastIcon + ".png";
-    let forecastDescription = forecasted.data[i].weather.description;
+// $.ajax({
+//   url: queryWeatherURL,
+//   method: "GET",
+// }).then(function (response) {
+//   let forecasted = response;
+//   let cardsArray = [];
+//   for (let i = 0; i < 4; i++) {
+//     let forecastDate = forecasted.data[i].valid_date;
+//     let localMinTemp = forecasted.data[i].min_temp;
+//     let localMaxTemp = forecasted.data[i].max_temp;
+//     let forecastIcon = forecasted.data[i].weather.icon;
+//     let forecastIconURL = weatherImageURL + forecastIcon + ".png";
+//     let forecastDescription = forecasted.data[i].weather.description;
 
-    let newCard = $("<div>").attr("class", "card-body");
-    let dateP = $("<h5>")
-      .attr("id", "forecastDate")
-      .text("date " + forecastDate)
-      .attr("class", "card-title");
-    let mintempP = $("<p>")
-      .attr("id", "localMinTemp")
-      .attr("class", "card-text")
-      .text("min temp " + localMinTemp);
-    let maxtempP = $("<p>")
-      .attr("id", "localMaxTemp")
-      .attr("class", "card-text")
-      .text("max temp " + localMaxTemp);
-    let descP = $("<p>")
-      .attr("id", "description")
-      .attr("class", "card-text")
-      .text(forecastDescription);
-    let newIMG = $("<img>")
-      .attr("src", forecastIconURL)
-      .attr("id", "weatherIcon")
-      .attr("alt", "Icon representing current weather conditions");
+//     let newCard = $("<div>").attr("class", "card-body");
+//     let dateP = $("<h5>")
+//       .attr("id", "forecastDate")
+//       .text("date " + forecastDate)
+//       .attr("class", "card-title");
+//     let mintempP = $("<p>")
+//       .attr("id", "localMinTemp")
+//       .attr("class", "card-text")
+//       .text("min temp " + localMinTemp);
+//     let maxtempP = $("<p>")
+//       .attr("id", "localMaxTemp")
+//       .attr("class", "card-text")
+//       .text("max temp " + localMaxTemp);
+//     let descP = $("<p>")
+//       .attr("id", "description")
+//       .attr("class", "card-text")
+//       .text(forecastDescription);
+//     let newIMG = $("<img>")
+//       .attr("src", forecastIconURL)
+//       .attr("id", "weatherIcon")
+//       .attr("alt", "Icon representing current weather conditions");
 
-    newCard.append(dateP);
-    newCard.append(mintempP);
-    newCard.append(maxtempP);
-    newCard.append(descP);
-    newCard.append(newIMG);
-    cardsArray.push(newCard);
-  }
+//     newCard.append(dateP);
+//     newCard.append(mintempP);
+//     newCard.append(maxtempP);
+//     newCard.append(descP);
+//     newCard.append(newIMG);
+//     cardsArray.push(newCard);
+//   }
 
-  let newDiv = $("<div>")
-    .attr("id", "weatherDiv")
-    .attr("class", "card text-white bg-info");
-  newDiv.append(cardsArray);
-  $("body").append(newDiv);
-});
+//   let newDiv = $("<div>")
+//     .attr("id", "weatherDiv")
+//     .attr("class", "card text-white bg-info");
+//   newDiv.append(cardsArray);
+//   $("body").append(newDiv);
+// });
 
 // Ajax call to GNews API. Response will be an object with an array of articles.
-$.ajax({
-  type: "GET",
-  url: newsQueryURL,
-  success: function (response) {
-    // Get the array of returned articles from the response.
-    let arrArticles = response.articles;
+// $.ajax({
+//   type: "GET",
+//   url: newsQueryURL,
+//   success: function (response) {
+//     // Get the array of returned articles from the response.
+//     let arrArticles = response.articles;
 
-    // Loop through the array and call renderArticle to display the each one.
-    arrArticles.forEach((article) => {
-      console.log(article);
-      renderArticle(article);
-    });
-  },
-});
+//     // Loop through the array and call renderArticle to display the each one.
+//     arrArticles.forEach((article) => {
+//       console.log(article);
+//       renderArticle(article);
+//     });
+//   },
+// });
 
 function renderArticle(objArticle) {
   // Take the object that's been passed to the function and create some string variables.
@@ -121,6 +121,7 @@ function renderArticle(objArticle) {
 // Saves the current search to favourites in localstorage.
 function saveToFavourites(strDestination) {
 
+  console.log(`Saving ${strDestination}`);
   // Call getFavourites to creaate the favourites array. This will either be empty or contain items already in storage.
   let arrFavourites = getFavourites();
 
@@ -132,7 +133,7 @@ function saveToFavourites(strDestination) {
   }
 
   // Save the array back to localstorage.
-  localStorage.setItem("infTravelFavourites", JSON.stringify(arrFavourites));
+  localStorage.setItem("travelFavourites", JSON.stringify(arrFavourites));
 
 }
 
@@ -141,7 +142,7 @@ function saveToFavourites(strDestination) {
 function getFavourites() {
 
   // Try and get stored items.
-  let arrDestinations = localStorage.getItem("infTravelFavourites");
+  let arrDestinations = localStorage.getItem("travelFavourites");
 
   // If there was nothing in loclstorage, create an empty array. Otherwise parse and assign to the array.
   if (arrDestinations === null) {
@@ -159,3 +160,49 @@ function getFavourites() {
 
 }
 
+
+// Function to populate the favourites modal and display it.
+function showFavourites() {
+
+  // Populate the history list from localstorage.
+  let arrFavourites = getFavourites();
+
+  arrFavourites.forEach(function (favourite) {
+
+    // Add a new li to the list.
+    // First create the new li, add classes and text.
+    let newLI = $("<li>")
+    newLI.addClass("list-group-item d-flex align-items-left favourite-item");
+    newLI.text(favourite);
+
+    // Add the search and remove buttons to the li.
+    newLI.append(`<button class="btn btn-sm btn-primary ml-auto fav-search" disabled>Search</button>`);
+    newLI.append(`<button class="btn btn-sm btn-danger ml-2 fav-remove" disabled>Remove</button>`);
+
+    // Append the new favourite entry to the list.
+    $("#favList").append(newLI);
+
+  })
+
+  // If there are entries to show, also show the remove all button.
+  if (arrFavourites.length > 0) {
+    $("#btnRemoveAll").show();
+  }
+
+  // Show the modal.
+  $("#favModal").modal("show");
+
+}
+
+
+// Listener for the favourites button.
+$("#btnFavourites").on("click", function (event) {
+
+  event.preventDefault();
+
+  // Call showFavourites to render the modal.
+  showFavourites();
+
+});
+
+// saveToFavourites("paris");
