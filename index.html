@@ -11,80 +11,72 @@
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
 
   <!-- Font Awesome Link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <!-- Optional CSS-->
   <link rel="stylesheet" href="assets/css/style.css" />
   <title>Informed Traveler App</title>
 </head>
 
 <body>
-
-
   <!-- Navbar -->
   <ul class="nav nav-pills nav-fill" id="navbar">
-    <i class="fa fa-newspaper-o" style="font-size:48px"></i>
+    <i class="fa fa-newspaper-o" style="font-size: 48px"></i>
     <li class="nav-item">
       <a class="nav-link" href="#">Headlines</a>
     </li>
-    <li class="nav-item"><button class="btn btn-primary" id="btnFavourites">Favourites</button></li>
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <li class="nav-item">
+      <button class="btn btn-primary" id="btnFavourites">Favourites</button>
+    </li>
+    <form class="form-inline" id="userInputForm">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="userInput" />
       <button type="button" class="btn btn-dark">+</button>
     </form>
   </ul>
 
-
   <!-- First Container for Weather -->
   <h1>Town, State/Country</h1>
-  <div class="container-fluid" id="weathercontainer">
-    <div class="container-sm" id="currentdayweather">Today's Weather</div>
-    <div class="container-sm" id="daytwo">Day Two</div>
-    <div class="container-sm" id="daythree">Day Three</div>
-    <div class="container-sm" id="dayfour">Day Four</div>
-
-
-  </div>
+  <div class="container-fluid" id="weathercontainer"></div>
 
   <!-- Second Container for News -->
   <h1>Top Stories</h1>
   <div class="container-fluid" id="newscontainer">
-
+    ...
     <!-- Media List For Top Stories -->
     <ul class="list-unstyled">
       <li class="media">
-        <img src="" class="mr-3" alt="">
+        <img src="#" class="mr-3" alt="..." />
         <div class="media-body">
           <h5 class="mt-0 mb-1">News Article 1</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
-          vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-          lacinia congue felis in faucibus.
+          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+          scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+          vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+          vulputate fringilla. Donec lacinia congue felis in faucibus.
         </div>
       </li>
       <li class="media my-4">
-        <img src="" class="mr-3" alt="">
+        <img src="#" class="mr-3" alt="..." />
         <div class="media-body">
           <h5 class="mt-0 mb-1">News Article 2</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
-          vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-          lacinia congue felis in faucibus.
+          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+          scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+          vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+          vulputate fringilla. Donec lacinia congue felis in faucibus.
         </div>
       </li>
       <li class="media">
-        <img src="" class="mr-3" alt="">
+        <img src="#" class="mr-3" alt="..." />
         <div class="media-body">
           <h5 class="mt-0 mb-1">News Article 3</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
-          vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-          lacinia congue felis in faucibus.
+          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+          scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+          vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+          vulputate fringilla. Donec lacinia congue felis in faucibus.
         </div>
       </li>
     </ul>
-
   </div>
 
-
   <!-- Modal for showing favourites -->
-  <!-- Modal -->
   <div class="modal fade" id="favModal" tabindex="-1" aria-labelledby="favModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -105,8 +97,6 @@
     </div>
   </div>
 
-
-
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -118,7 +108,6 @@
     crossorigin="anonymous"></script>
 
   <script src="assets/js/script.js"></script>
-
 </body>
 
 </html>
