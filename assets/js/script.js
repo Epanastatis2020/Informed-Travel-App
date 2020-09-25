@@ -116,3 +116,46 @@ function renderArticle(objArticle) {
   newLI.append(articleDiv);
   $("ul.list-unstyled").append(newLI);
 }
+
+
+// Saves the current search to favourites in localstorage.
+function saveToFavourites(strDestination) {
+
+  // Call getFavourites to creaate the favourites array. This will either be empty or contain items already in storage.
+  let arrFavourites = getFavourites();
+
+  // Check if the new destination is already been saved. If not, save it.
+  if (!arrFavourites.includes(strDestination)) {
+
+    arrFavourites.push(strDestination);
+
+  }
+
+  // Save the array back to localstorage.
+  localStorage.setItem("infTravelFavourites", JSON.stringify(arrFavourites));
+
+}
+
+
+// Get favourites from localstorage or create an empty array. Return the array.
+function getFavourites() {
+
+  // Try and get stored items.
+  let arrDestinations = localStorage.getItem("infTravelFavourites");
+
+  // If there was nothing in loclstorage, create an empty array. Otherwise parse and assign to the array.
+  if (arrDestinations === null) {
+
+    arrDestinations = [];
+
+  }
+  else {
+
+    arrDestinations = JSON.parse(arrDestinations);
+  }
+
+  // Return the array to the calling function.
+  return arrDestinations;
+
+}
+
