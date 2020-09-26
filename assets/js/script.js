@@ -22,12 +22,13 @@ function getWeather() {
   let query = "city=" + input;
   const queryWeatherURL = weatherAPI + query + forecastRange + APIkey;
 
+  console.log(`Search weather: ${input}`);
+
   $.ajax({
     url: queryWeatherURL,
     method: "GET",
   }).then(function (response) {
     let forecasted = response;
-    let catchCountry = forecasted.country_code; // Moved this out of the for loop (Tim)
 
     // Looping through the array and creating elements for each instance (i.e. day)
 
@@ -69,11 +70,12 @@ function getWeather() {
       newCard.append(newIMG);
       cardsArray.push(newCard);
     }
-    debugger;
+
     let weatherRow = $("<div>").attr("class", "row");
     weatherRow.append(cardsArray);
     $("#weathercontainer").append(weatherRow);
 
+    let catchCountry = forecasted.country_code; // Moved this out of the for loop (Tim)
     getNews(catchCountry);
   });
 }
@@ -84,12 +86,17 @@ function getNews(catchCountry) {
   let newsAPIKey = "0e966fb836610aa7a1a213a0b9d61c6b";
   let newsQueryURL = `https://gnews.io/api/v4/top-headlines?country=${catchCountry}&lang=en&max=5&token=${newsAPIKey}`;
 
+  console.log(`Search news: ${catchCountry}`);
+
   $.ajax({
     type: "GET",
     url: newsQueryURL,
     success: function (response) {
       // Get the array of returned articles from the response.
       let arrArticles = response.articles;
+
+      // Remove any existing articles from the page.
+      $(".news-item").remove();
 
       // Loop through the array and call renderArticle to display the each one.
       arrArticles.forEach((article) => {
@@ -99,7 +106,9 @@ function getNews(catchCountry) {
   });
 }
 
+
 function renderArticle(objArticle) {
+
   // Take the object that's been passed to the function and create some string variables.
   let strTitle = objArticle.title;
   let strDescription = objArticle.description;
@@ -108,7 +117,7 @@ function renderArticle(objArticle) {
   let strSource = objArticle.source.name;
 
   // Build a new list item to render.
-  let newLI = $("<li>").addClass("media");
+  let newLI = $("<li>").addClass("media news-item");
 
   // Create the image element.
   let articleImage = $("<img>")
@@ -236,6 +245,21 @@ function removeFavourite(favourite) {
   }
 
 }
+
+// Listener for the add to favourites button.
+$("#btnAddFavourite").on("click", function (event) {
+
+  event.preventDefault();
+
+  // Get user input from the search box.
+  let strInput = $("#userInput").val();
+
+  // Call saveFavourite to save to localstorage.
+  saveFavourite(strInput);
+
+});
+
+
 
 // Listener for the favourites button.
 $("#btnFavourites").on("click", function (event) {
