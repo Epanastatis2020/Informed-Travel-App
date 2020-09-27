@@ -144,7 +144,6 @@ function renderArticle(objArticle) {
 // Saves the current search to favourites in localstorage.
 function saveFavourite(strDestination) {
 
-  console.log(`Saving ${strDestination}`);
   // Call getFavourites to creaate the favourites array. This will either be empty or contain items already in storage.
   let arrFavourites = getFavourites();
 
@@ -157,6 +156,10 @@ function saveFavourite(strDestination) {
 
   // Save the array back to localstorage.
   localStorage.setItem("travelFavourites", JSON.stringify(arrFavourites));
+
+  // Open modal to inform the user it has been saved.
+  $("#favAddedText").text(`${strDestination} added to favourites.`)
+  $("#favAdded").modal("show");
 
 }
 
@@ -186,6 +189,9 @@ function getFavourites() {
 
 // Function to populate the favourites modal and display it.
 function showFavourites() {
+
+  // Remove existing items from the favourites screen list.
+  $(".fav-item").remove();
 
   // Populate the history list from localstorage.
   let arrFavourites = getFavourites();
