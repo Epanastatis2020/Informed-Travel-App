@@ -80,6 +80,7 @@ function getWeather() {
   });
 }
 
+
 // Ajax call to GNews API. Response will be an object with an array of articles.
 function getNews(catchCountry) {
   // NewsAPI
@@ -107,6 +108,7 @@ function getNews(catchCountry) {
 }
 
 
+// Function to render an individual news article on the page.
 function renderArticle(objArticle) {
 
   // Take the object that's been passed to the function and create some string variables.
@@ -227,6 +229,7 @@ function showFavourites() {
 }
 
 
+// Removes item from favourites when the remove button is clicked.
 function removeFavourite(favourite) {
 
   // Try and get items from storage. An array will be returned but it will be empty if there was nothing
@@ -252,6 +255,7 @@ function removeFavourite(favourite) {
 
 }
 
+
 // Listener for the add to favourites button.
 $("#btnAddFavourite").on("click", function (event) {
 
@@ -264,7 +268,6 @@ $("#btnAddFavourite").on("click", function (event) {
   saveFavourite(strInput);
 
 });
-
 
 
 // Listener for the favourites button.
@@ -335,7 +338,3 @@ $("#btnRemoveAll").on("click", function (event) {
 });
 
 
-
-
-
-// saveFavourite("paris");
