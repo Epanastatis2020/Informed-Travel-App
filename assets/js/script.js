@@ -80,6 +80,7 @@ function getWeather() {
   });
 }
 
+
 // Ajax call to GNews API. Response will be an object with an array of articles.
 function getNews(catchCountry) {
   // NewsAPI
@@ -107,6 +108,7 @@ function getNews(catchCountry) {
 }
 
 
+// Function to render an individual news article on the page.
 function renderArticle(objArticle) {
 
   // Take the object that's been passed to the function and create some string variables.
@@ -144,7 +146,6 @@ function renderArticle(objArticle) {
 // Saves the current search to favourites in localstorage.
 function saveFavourite(strDestination) {
 
-  console.log(`Saving ${strDestination}`);
   // Call getFavourites to creaate the favourites array. This will either be empty or contain items already in storage.
   let arrFavourites = getFavourites();
 
@@ -157,6 +158,10 @@ function saveFavourite(strDestination) {
 
   // Save the array back to localstorage.
   localStorage.setItem("travelFavourites", JSON.stringify(arrFavourites));
+
+  // Open modal to inform the user it has been saved.
+  $("#favAddedText").text(`${strDestination} added to favourites.`)
+  $("#favAdded").modal("show");
 
 }
 
@@ -186,6 +191,9 @@ function getFavourites() {
 
 // Function to populate the favourites modal and display it.
 function showFavourites() {
+
+  // Remove existing items from the favourites screen list.
+  $(".fav-item").remove();
 
   // Populate the history list from localstorage.
   let arrFavourites = getFavourites();
@@ -221,6 +229,7 @@ function showFavourites() {
 }
 
 
+// Removes item from favourites when the remove button is clicked.
 function removeFavourite(favourite) {
 
   // Try and get items from storage. An array will be returned but it will be empty if there was nothing
@@ -246,6 +255,7 @@ function removeFavourite(favourite) {
 
 }
 
+
 // Listener for the add to favourites button.
 $("#btnAddFavourite").on("click", function (event) {
 
@@ -258,7 +268,6 @@ $("#btnAddFavourite").on("click", function (event) {
   saveFavourite(strInput);
 
 });
-
 
 
 // Listener for the favourites button.
@@ -329,7 +338,3 @@ $("#btnRemoveAll").on("click", function (event) {
 });
 
 
-
-
-
-// saveFavourite("paris");
