@@ -267,11 +267,28 @@ function removeFavourite(favourite) {
 $("#btnAddFavourite").on("click", function (event) {
   event.preventDefault();
 
-  // Get user input from the search box.
-  let strInput = $("#userInput").val();
+  // Get user input from the title.
+  let strInput = $("#weathertitle").text();
 
-  // Call saveFavourite to save to localstorage.
-  saveFavourite(strInput);
+  if ($("#btnAddFavourite").hasClass("far")) {
+
+    // Change from an outline star to a solid star.
+    $("#btnAddFavourite").removeClass("far").addClass("fas");
+
+    // Call saveFavourite to save to localstorage.
+    saveFavourite(strInput);
+
+  }
+  else {
+
+    // Change from a solid star to an outline star.
+    $("#btnAddFavourite").removeClass("fas").addClass("far")
+
+    // Call removeFavourite to remove from favourites.
+    removeFavourite(strInput);
+
+  }
+
 });
 
 // Listener for the favourites button.

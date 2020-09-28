@@ -1,5 +1,5 @@
 body {
-  background-color: dimgrey;  
+  background-color: dimgrey;
 }
 
 /* #navbar {
@@ -100,6 +100,20 @@ h1 {
 color: ghostwhite;
 text-align: center;
 size: 20px;
-font-family: Tahoma, Verdana, Segoe, sans-serif; 
+font-family: Tahoma, Verdana, Segoe, sans-serif;
 font-weight: bold;
+}
+
+.fa-star {
+    color: ghostwhite;
+    font-size: 1.2rem;
+    float: right;
+}
+
+.fa-star:focus {
+    box-shadow: none;
+}
+
+.fa-star:hover {
+    color: ghostwhite;
 }
