@@ -7,12 +7,14 @@ $(document).ready(function () {
   });
 });
 
+// This pulls in the weather data as a function of the user input
+
 function getWeather() {
-  //Preparing the weather div container
+  // Preparing the weather div container
 
   $("#weathercontainer").empty();
 
-  //Capturing weather information
+  // Creating variables necessary for API call (mostly constructing the queryURL)
 
   const weatherImageURL = "https://www.weatherbit.io/static/img/icons/";
   const weatherAPI = "https://api.weatherbit.io/v2.0/forecast/daily?";
@@ -22,19 +24,33 @@ function getWeather() {
   let query = "city=" + input;
   const queryWeatherURL = weatherAPI + query + forecastRange + APIkey;
 
-  console.log(`Search weather: ${input}`);
+  // Ajax call to Weatherbit.io API
 
   $.ajax({
     url: queryWeatherURL,
     method: "GET",
+    // Manage 404 to show error message
+    statusCode: {
+      204: function () {
+        $("#404modalText").text("Cannot find a match for that entry");
+        $("#404modal").modal("show");
+      },
+    },
   }).then(function (response) {
+    // Stop handling of AJAX response if no valid response was returned
+    if (!response) {
+      return;
+    }
+
     let forecasted = response;
 
     // Looping through the array and creating elements for each instance (i.e. day)
 
     let cardsArray = [];
     for (let i = 0; i < 4; i++) {
+      // Receiving date from API
       let receivedDate = forecasted.data[i].valid_date;
+      // Formatting date into something more readable
       const options = { weekday: "short", month: "short", day: "numeric" };
       let forecastDate = new Date(receivedDate).toLocaleDateString(
         "en-au",
@@ -46,6 +62,7 @@ function getWeather() {
       let forecastIconURL = weatherImageURL + forecastIcon + ".png";
       let forecastDescription = forecasted.data[i].weather.description;
 
+      // Creating elements to display retrieved API data, using Bootstrap to ensure they are responsive and look good in their container
       let newCard = $("<div>").attr(
         "class",
         "d-flex col-md-3  flex-column justify-content-center align-items-center pt-3"
@@ -71,6 +88,7 @@ function getWeather() {
         .attr("id", "weatherIcon")
         .attr("alt", "Icon representing current weather conditions");
 
+      // Appending newly created elements to the newCard, and pushing that to the cardsArray
       newCard.append(dateP);
       newCard.append(mintempP);
       newCard.append(maxtempP);
@@ -79,14 +97,18 @@ function getWeather() {
       cardsArray.push(newCard);
     }
 
+    // creating the row that will house the cardsArray, and appending to existing html div
     let weatherRow = $("<div>").attr("class", "row");
     weatherRow.append(cardsArray);
     $("#weathercontainer").append(weatherRow);
 
-    let catchCountry = forecasted.country_code; // Moved this out of the for loop (Tim)
+    // capturing the country code which is used in the GNews API
+    let catchCountry = forecasted.country_code;
     getNews(catchCountry);
 
+    // capturing the city name which is displayed as the title for the forecast
     let cityName = forecasted.city_name;
+    // adding text to html element representing the title of the forecast
     $("#weathertitle").text(cityName + ", " + catchCountry);
   });
 }

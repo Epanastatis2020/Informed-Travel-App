@@ -55,14 +55,7 @@
 
     <!-- First Container for Weather -->
     <h1 id="weathertitle"></h1>
-    <div class="container-fluid" id="weathercontainer">
-      <div class="container-sm" id="currentdayweather">Today's Weather</div>
-      <div class="container-sm" id="daytwo">Day Two</div>
-      <div class="container-sm" id="daythree">Day Three</div>
-      <div class="container-sm" id="dayfour">Day Four</div>
-
-      ...
-    </div>
+    <div class="container-fluid" id="weathercontainer"></div>
     <br />
 
     <!-- Second Container for News -->
@@ -118,6 +111,24 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body" id="favAddedText"></div>
+          <div class="modal-footer justify-content-center">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for 404 handling-->
+    <div class="modal fade" id="404modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body" id="404modalText"></div>
           <div class="modal-footer justify-content-center">
             <button
               type="button"
