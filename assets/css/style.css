@@ -20,15 +20,55 @@ font-style: bold;
 
 #weathercontainer {
     background-color: darkgrey;
-    width: 50%;
+    width: 60%;
     margin-top: 50px;
     /* border-radius: 30px 30px 30px 30px;  */
 }
 
 #newscontainer {
 background-color: darkgrey;
-width: 50%;
+width: 60%;
 /* border-radius: 30px 30px 30px 30px;  */
+}
+
+@media only screen and (max-width: 600px) {
+    #newscontainer {
+      width: 100%;
+    }
+  }
+
+#weathernav {
+    float:right;
+}
+
+.mt-0 mb-1 {
+max-width: 20%;
+}
+
+.mb-1 {
+    float:left;
+}
+
+#btnAddFavourite {
+    float: right;
+    size: 100px;
+}
+
+#btnFavourites {
+    float: right;
+    size: 100px;
+}
+
+#userInputForm {
+    float:right;
+}
+
+.article-image {
+    max-height: 50px;
+}
+
+.list-unstyled {
+    max-width: 90%;
 }
 
 #headlinesbutton {
