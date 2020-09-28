@@ -34,14 +34,22 @@ function getWeather() {
 
     let cardsArray = [];
     for (let i = 0; i < 4; i++) {
-      let forecastDate = forecasted.data[i].valid_date;
+      let receivedDate = forecasted.data[i].valid_date;
+      const options = { weekday: "short", month: "short", day: "numeric" };
+      let forecastDate = new Date(receivedDate).toLocaleDateString(
+        "en-au",
+        options
+      );
       let localMinTemp = forecasted.data[i].min_temp;
       let localMaxTemp = forecasted.data[i].max_temp;
       let forecastIcon = forecasted.data[i].weather.icon;
       let forecastIconURL = weatherImageURL + forecastIcon + ".png";
       let forecastDescription = forecasted.data[i].weather.description;
 
-      let newCard = $("<div>").attr("class", "col-md-3");
+      let newCard = $("<div>").attr(
+        "class",
+        "d-flex col-md-3  flex-column justify-content-center align-items-center pt-3"
+      );
       let dateP = $("<h5>")
         .attr("id", "forecastDate")
         .text(forecastDate)
@@ -49,11 +57,11 @@ function getWeather() {
       let mintempP = $("<p>")
         .attr("id", "localMinTemp")
         .attr("class", "card-text")
-        .text("min temp " + localMinTemp);
+        .text("Min Temp " + localMinTemp + " °C");
       let maxtempP = $("<p>")
         .attr("id", "localMaxTemp")
         .attr("class", "card-text")
-        .text("max temp " + localMaxTemp);
+        .text("Max Temp " + localMaxTemp + " °C");
       let descP = $("<p>")
         .attr("id", "description")
         .attr("class", "card-text")
@@ -77,9 +85,11 @@ function getWeather() {
 
     let catchCountry = forecasted.country_code; // Moved this out of the for loop (Tim)
     getNews(catchCountry);
+
+    let cityName = forecasted.city_name;
+    $("#weathertitle").text(cityName + ", " + catchCountry);
   });
 }
-
 
 // Ajax call to GNews API. Response will be an object with an array of articles.
 function getNews(catchCountry) {
@@ -107,10 +117,8 @@ function getNews(catchCountry) {
   });
 }
 
-
 // Function to render an individual news article on the page.
 function renderArticle(objArticle) {
-
   // Take the object that's been passed to the function and create some string variables.
   let strTitle = objArticle.title;
   let strDescription = objArticle.description;
@@ -142,56 +150,42 @@ function renderArticle(objArticle) {
   $("ul.list-unstyled").append(newLI);
 }
 
-
 // Saves the current search to favourites in localstorage.
 function saveFavourite(strDestination) {
-
   // Call getFavourites to creaate the favourites array. This will either be empty or contain items already in storage.
   let arrFavourites = getFavourites();
 
   // Check if the new destination is already been saved. If not, save it.
   if (!arrFavourites.includes(strDestination)) {
-
     arrFavourites.push(strDestination);
-
   }
 
   // Save the array back to localstorage.
   localStorage.setItem("travelFavourites", JSON.stringify(arrFavourites));
 
   // Open modal to inform the user it has been saved.
-  $("#favAddedText").text(`${strDestination} added to favourites.`)
+  $("#favAddedText").text(`${strDestination} added to favourites.`);
   $("#favAdded").modal("show");
-
 }
-
 
 // Get favourites from localstorage or create an empty array. Return the array.
 function getFavourites() {
-
   // Try and get stored items.
   let arrDestinations = localStorage.getItem("travelFavourites");
 
   // If there was nothing in loclstorage, create an empty array. Otherwise parse and assign to the array.
   if (arrDestinations === null) {
-
     arrDestinations = [];
-
-  }
-  else {
-
+  } else {
     arrDestinations = JSON.parse(arrDestinations);
   }
 
   // Return the array to the calling function.
   return arrDestinations;
-
 }
-
 
 // Function to populate the favourites modal and display it.
 function showFavourites() {
-
   // Remove existing items from the favourites screen list.
   $(".fav-item").remove();
 
@@ -199,66 +193,56 @@ function showFavourites() {
   let arrFavourites = getFavourites();
 
   arrFavourites.forEach(function (favourite) {
-
     // Add a new li to the list.
     // First create the new li, add classes and text.
-    let newLI = $("<li>")
+    let newLI = $("<li>");
     newLI.addClass("list-group-item d-flex align-items-left fav-item");
     newLI.text(favourite);
 
     // Add the search and remove buttons to the li.
-    newLI.append(`<button class="btn btn-sm btn-primary ml-auto fav-search" disabled>Search</button>`);
-    newLI.append(`<button class="btn btn-sm btn-danger ml-2 fav-remove">Remove</button>`);
+    newLI.append(
+      `<button class="btn btn-sm btn-primary ml-auto fav-search" disabled>Search</button>`
+    );
+    newLI.append(
+      `<button class="btn btn-sm btn-danger ml-2 fav-remove">Remove</button>`
+    );
 
     // Append the new favourite entry to the list.
     $("#favList").append(newLI);
-
-  })
+  });
 
   // If there are entries to show, also show the remove all button.
   if (arrFavourites.length > 0) {
     $("#btnRemoveAll").show();
-  }
-  else {
+  } else {
     $("#btnRemoveAll").hide();
   }
 
   // Show the modal.
   $("#favModal").modal("show");
-
 }
-
 
 // Removes item from favourites when the remove button is clicked.
 function removeFavourite(favourite) {
-
   // Try and get items from storage. An array will be returned but it will be empty if there was nothing
   // in storage.
   let arrFavs = getFavourites();
 
   // Filter the array to remove the city.
-  arrFavs = arrFavs.filter(item => item !== favourite)
+  arrFavs = arrFavs.filter((item) => item !== favourite);
 
   // If there's nothing left in the array, remove the entry from localstorage.
   if (arrFavs.length === 0) {
-
     // Remove entry from localstorage.
     localStorage.removeItem("travelFavourites");
-
-  }
-  else {
-
+  } else {
     // Save back to localstorage.
     localStorage.setItem("travelFavourites", JSON.stringify(arrFavs));
-
   }
-
 }
-
 
 // Listener for the add to favourites button.
 $("#btnAddFavourite").on("click", function (event) {
-
   event.preventDefault();
 
   // Get user input from the search box.
@@ -266,42 +250,29 @@ $("#btnAddFavourite").on("click", function (event) {
 
   // Call saveFavourite to save to localstorage.
   saveFavourite(strInput);
-
 });
-
 
 // Listener for the favourites button.
 $("#btnFavourites").on("click", function (event) {
-
   event.preventDefault();
 
   // Call showFavourites to render the modal.
   showFavourites();
-
 });
-
 
 // Listener for the search and remove buttons on the history screen.
 $("#favList").on("click", "button", function (event) {
-
-
   event.preventDefault();
-
 
   // Get the name of the selected item
   let strFavName = $(this).parent().contents()[0].textContent;
 
-
   // Call getWeatherData if the search button was clicked or remove the item
   // if the remove button was clicked.
   if ($(this).hasClass("fav-search")) {
-
     // hideHistory();
     // getWeatherData(strFavName);
-
-  }
-  else if ($(this).hasClass("fav-remove")) {
-
+  } else if ($(this).hasClass("fav-remove")) {
     // Call removeFavourite to remove the item from storage.
     removeFavourite(strFavName);
 
@@ -310,31 +281,21 @@ $("#favList").on("click", "button", function (event) {
 
     // If it was the last one hide the remove all button.
     if ($(".fav-item").length === 0) {
-
       $("#btnRemoveAll").hide();
-
     }
-
   }
-
 });
-
 
 // Listener for the remove all button on the history screen.
 $("#btnRemoveAll").on("click", function (event) {
-
   event.preventDefault();
 
   // Remove entries from localstorage.
   localStorage.removeItem("travelFavourites");
-
 
   // Remove items from the favourites screen list.
   $(".fav-item").remove();
 
   // Hide the remove all button and disable the history button.
   $("#btnRemoveAll").hide();
-
 });
-
-
