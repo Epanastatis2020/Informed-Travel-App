@@ -29,7 +29,19 @@ function getWeather() {
   $.ajax({
     url: queryWeatherURL,
     method: "GET",
+    // Manage 404 to show error message
+    statusCode: {
+      204: function () {
+        $("#404modalText").text("Cannot find a match for that entry");
+        $("#404modal").modal("show");
+      },
+    },
   }).then(function (response) {
+    // Stop handling of AJAX response if no valid response was returned
+    if (!response) {
+      return;
+    }
+
     let forecasted = response;
 
     // Looping through the array and creating elements for each instance (i.e. day)
