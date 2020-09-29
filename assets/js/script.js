@@ -3,13 +3,14 @@
 $(document).ready(function () {
   $("#userInputForm").submit(function (event) {
     event.preventDefault();
-    getWeather();
+    let input = $("#userInput").val();
+    getWeather(input);
   });
 });
 
 // This pulls in the weather data as a function of the user input
 
-function getWeather() {
+function getWeather(searchTerm) {
   // Preparing the weather div container
 
   $("#weathercontainer").empty();
@@ -20,8 +21,7 @@ function getWeather() {
   const weatherAPI = "https://api.weatherbit.io/v2.0/forecast/daily?";
   const APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee";
   let forecastRange = "&days=4";
-  let input = $("#userInput").val();
-  let query = "city=" + input;
+  let query = "city=" + searchTerm;
   const queryWeatherURL = weatherAPI + query + forecastRange + APIkey;
 
   // Ajax call to Weatherbit.io API
@@ -109,7 +109,7 @@ function getWeather() {
     // capturing the city name which is displayed as the title for the forecast
     let cityName = forecasted.city_name;
     // adding text to html element representing the title of the forecast
-    $("#weathertitle").text(cityName + ", " + catchCountry);
+    $("#weathertitle").html(cityName + ", " + catchCountry);
 
     // Call setFavStatus to show the right favourites icon next to the header.
     setFavStatus($("#weathertitle").text())
@@ -230,7 +230,7 @@ function showFavourites() {
 
     // Add the search and remove buttons to the li.
     newLI.append(
-      `<button class="btn btn-sm btn-primary ml-auto fav-search" disabled>Search</button>`
+      `<button class="btn btn-sm btn-primary ml-auto fav-search">Search</button>`
     );
     newLI.append(
       `<button class="btn btn-sm btn-danger ml-2 fav-remove">Remove</button>`
@@ -340,8 +340,13 @@ $("#favList").on("click", "button", function (event) {
   // Call getWeatherData if the search button was clicked or remove the item
   // if the remove button was clicked.
   if ($(this).hasClass("fav-search")) {
-    // hideHistory();
-    // getWeatherData(strFavName);
+
+    // Hide favourites screen;
+    $("#favModal").modal("hide");
+
+    // search again for the favourited city
+    getWeather(strFavName);
+
   } else if ($(this).hasClass("fav-remove")) {
     // Call removeFavourite to remove the item from storage.
     removeFavourite(strFavName);

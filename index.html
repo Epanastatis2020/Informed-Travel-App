@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
   <!-- Optional CSS-->
   <link rel="stylesheet" href="assets/css/style.css" />
-  <title>Informed Traveler App</title>
+  <title>Informed Traveller App</title>
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -32,11 +33,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-
       </ul>
       <form class="form-inline" id="userInputForm">
         <input class="form-control mr-sm-2" type="search" placeholder="Enter City Name" aria-label="Search"
           id="userInput" />
+        <button class="btn btn-primary mr-2" type="submit"><i class="fas fa-search"></i></button>
       </form>
       <button class="btn btn-primary" id="btnFavourites">Favourites</button>
 
@@ -44,15 +45,15 @@
   </nav>
 
   <!-- First Container for Weather -->
-  <div class="container">
-    <button class="btn far fa-star" id="btnAddFavourite"></button>
-    <h1 id="weathertitle"></h1>
+  <div class="container pt-5 mb-5">
+    <h1>
+      <span id="weathertitle"></span><button class="btn far fa-star pt-0" id="btnAddFavourite"></button>
+    </h1>
   </div>
   <div class="container-fluid" id="weathercontainer"></div>
-  <br />
 
   <!-- Second Container for News -->
-  <h1>Top Stories</h1>
+  <h1 class="pt-5 mb-5">Top Stories</h1>
   <div class="container-fluid mb-5" id="newscontainer">
 
   </div>

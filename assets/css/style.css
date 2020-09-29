@@ -5,14 +5,11 @@ body {
 #weathercontainer {
     background-color: darkgrey;
     width: 60%;
-    margin-top: 50px;
-    /* border-radius: 30px 30px 30px 30px;  */
 }
 
 #newscontainer {
 background-color: darkgrey;
 width: 60%;
-/* border-radius: 30px 30px 30px 30px;  */
 }
 
 @media only screen and (max-width: 600px) {
@@ -31,11 +28,6 @@ max-width: 20%;
 
 .mb-1 {
     float:left;
-}
-
-#btnAddFavourite {
-    float: right;
-    size: 100px;
 }
 
 #btnFavourites {
@@ -90,7 +82,6 @@ font-weight: bold;
 .fa-star {
     color: gold;
     font-size: 1.2rem;
-    float: right;
 }
 
 .fa-star:focus {
