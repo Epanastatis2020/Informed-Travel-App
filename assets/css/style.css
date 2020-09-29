@@ -42,6 +42,7 @@ h1 {
 
 .weather-card {
     border-right: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
 }
 
 .card-title {
