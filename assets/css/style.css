@@ -5,14 +5,11 @@ body {
 #weathercontainer {
     background-color: darkgrey;
     width: 60%;
-    margin-top: 50px;
-    /* border-radius: 30px 30px 30px 30px;  */
 }
 
 #newscontainer {
 background-color: darkgrey;
 width: 60%;
-/* border-radius: 30px 30px 30px 30px;  */
 }
 
 @media only screen and (max-width: 600px) {
@@ -33,11 +30,6 @@ max-width: 20%;
     float:left;
 }
 
-#btnAddFavourite {
-    float: right;
-    size: 100px;
-}
-
 #btnFavourites {
     float: right;
     size: 100px;
@@ -48,8 +40,7 @@ max-width: 20%;
 }
 
 .article-image {
-    max-height: 100px;
-    max-width: 100px;
+    max-height: 5rem;
 }
 
 .list-unstyled {
@@ -91,7 +82,6 @@ font-weight: bold;
 .fa-star {
     color: gold;
     font-size: 1.2rem;
-    float: right;
 }
 
 .fa-star:focus {
@@ -100,4 +90,16 @@ font-weight: bold;
 
 .fa-star:hover {
     color: gold;
+}
+
+.news-item {
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.weather-card {
+    border-right: 1px solid #1a1a1a;
+}
+
+.card-title {
+    color: #1a1a1a;
 }

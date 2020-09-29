@@ -3,13 +3,14 @@
 $(document).ready(function () {
   $("#userInputForm").submit(function (event) {
     event.preventDefault();
-    getWeather();
+    let input = $("#userInput").val();
+    getWeather(input);
   });
 });
 
 // This pulls in the weather data as a function of the user input
 
-function getWeather() {
+function getWeather(searchTerm) {
   // Preparing the weather div container
 
   $("#weathercontainer").empty();
@@ -20,8 +21,7 @@ function getWeather() {
   const weatherAPI = "https://api.weatherbit.io/v2.0/forecast/daily?";
   const APIkey = "&key=2583e6de5539494ca55db9ec0e80a5ee";
   let forecastRange = "&days=4";
-  let input = $("#userInput").val();
-  let query = "city=" + input;
+  let query = "city=" + searchTerm;
   const queryWeatherURL = weatherAPI + query + forecastRange + APIkey;
 
   // Ajax call to Weatherbit.io API
@@ -65,7 +65,7 @@ function getWeather() {
       // Creating elements to display retrieved API data, using Bootstrap to ensure they are responsive and look good in their container
       let newCard = $("<div>").attr(
         "class",
-        "d-flex col-md-3  flex-column justify-content-center align-items-center pt-3"
+        "d-flex col-md-3  flex-column justify-content-center align-items-center pt-3 weather-card"
       );
       let dateP = $("<h5>")
         .attr("id", "forecastDate")
@@ -109,7 +109,7 @@ function getWeather() {
     // capturing the city name which is displayed as the title for the forecast
     let cityName = forecasted.city_name;
     // adding text to html element representing the title of the forecast
-    $("#weathertitle").text(cityName + ", " + catchCountry);
+    $("#weathertitle").html(cityName + ", " + catchCountry);
 
     // Call setFavStatus to show the right favourites icon next to the header.
     setFavStatus($("#weathertitle").text())
@@ -150,28 +150,33 @@ function renderArticle(objArticle) {
   let strImageURL = objArticle.image;
   let strSource = objArticle.source.name;
 
-  // Build a new list item to render.
-  let newLI = $("<li>").addClass("media news-item");
+  // Build a new row to render.
+  let newRow = $("<div>").addClass("row news-item align-items-center px-3 py-3");
 
-  // Create the image element.
+  // Create the image column and element.
+  let imageCol = $("<div>").addClass("col-md-4 col-lg-3 text-center");
   let articleImage = $("<img>")
-    .addClass("mr-3 article-image")
+    .addClass("article-image")
     .attr("src", strImageURL);
+  imageCol.append(articleImage);
 
   // Create the article div with header/link
-  let articleDiv = $("<div>").addClass("media-body");
-  let articleHeader = $("<h5>").addClass("mt-0 mb-1");
+  let articleCol = $("<div>").addClass("col");
+  let articleHeader = $("<h5>").addClass("row article-header py-2 mb-0");
   let articleLink = $("<a>").attr("href", strURL).text(strTitle);
   articleHeader.append(articleLink); // Append the <a> tag to the header
 
+  // Create the article description.
+  let articleDesc = $("<p>").addClass("row article-desc py-2 mb-0").text(strDescription);
+
   // Append article header and description to the div.
-  articleDiv.append(articleHeader);
-  articleDiv.append(strDescription);
+  articleCol.append(articleHeader);
+  articleCol.append(articleDesc);
 
   // Append the image and article div to the new li then append to the list.
-  newLI.append(articleImage);
-  newLI.append(articleDiv);
-  $("ul.list-unstyled").append(newLI);
+  newRow.append(imageCol);
+  newRow.append(articleCol);
+  $("#newscontainer").append(newRow);
 }
 
 // Saves the current search to favourites in localstorage.
@@ -188,7 +193,7 @@ function saveFavourite(strDestination) {
   localStorage.setItem("travelFavourites", JSON.stringify(arrFavourites));
 
   // Open modal to inform the user it has been saved.
-  $("#favAddedText").text(`${strDestination} added to favourites.`);
+  $("#favAddedText").text(`${strDestination} added to favourites`);
   $("#favAdded").modal("show");
 }
 
@@ -220,12 +225,12 @@ function showFavourites() {
     // Add a new li to the list.
     // First create the new li, add classes and text.
     let newLI = $("<li>");
-    newLI.addClass("list-group-item d-flex align-items-left fav-item");
+    newLI.addClass("list-group-item d-flex align-items-left fav-item bg-dark text-white");
     newLI.text(favourite);
 
     // Add the search and remove buttons to the li.
     newLI.append(
-      `<button class="btn btn-sm btn-primary ml-auto fav-search" disabled>Search</button>`
+      `<button class="btn btn-sm btn-primary ml-auto fav-search">Search</button>`
     );
     newLI.append(
       `<button class="btn btn-sm btn-danger ml-2 fav-remove">Remove</button>`
@@ -335,8 +340,13 @@ $("#favList").on("click", "button", function (event) {
   // Call getWeatherData if the search button was clicked or remove the item
   // if the remove button was clicked.
   if ($(this).hasClass("fav-search")) {
-    // hideHistory();
-    // getWeatherData(strFavName);
+
+    // Hide favourites screen;
+    $("#favModal").modal("hide");
+
+    // search again for the favourited city
+    getWeather(strFavName);
+
   } else if ($(this).hasClass("fav-remove")) {
     // Call removeFavourite to remove the item from storage.
     removeFavourite(strFavName);
@@ -367,3 +377,4 @@ $("#btnRemoveAll").on("click", function (event) {
   $("#btnAddFavourite").removeClass("fas").addClass("far");
 
 });
+
