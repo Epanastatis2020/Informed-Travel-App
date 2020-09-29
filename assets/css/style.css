@@ -1,5 +1,5 @@
 body {
-  background-color: #1a1a1a;  
+  background-color: #1a1a1a;
 }
 
 #weathercontainer {
@@ -85,6 +85,19 @@ h1 {
 color: ghostwhite;
 text-align: center;
 size: 20px;
-/* font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";  */
 font-weight: bold;
+}
+
+.fa-star {
+    color: gold;
+    font-size: 1.2rem;
+    float: right;
+}
+
+.fa-star:focus {
+    box-shadow: none;
+}
+
+.fa-star:hover {
+    color: gold;
 }
