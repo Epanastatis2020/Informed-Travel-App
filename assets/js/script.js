@@ -193,7 +193,7 @@ function saveFavourite(strDestination) {
   localStorage.setItem("travelFavourites", JSON.stringify(arrFavourites));
 
   // Open modal to inform the user it has been saved.
-  $("#favAddedText").text(`${strDestination} added to favourites.`);
+  $("#favAddedText").text(`${strDestination} added to favourites`);
   $("#favAdded").modal("show");
 }
 
@@ -225,7 +225,7 @@ function showFavourites() {
     // Add a new li to the list.
     // First create the new li, add classes and text.
     let newLI = $("<li>");
-    newLI.addClass("list-group-item d-flex align-items-left fav-item");
+    newLI.addClass("list-group-item d-flex align-items-left fav-item bg-dark text-white");
     newLI.text(favourite);
 
     // Add the search and remove buttons to the li.

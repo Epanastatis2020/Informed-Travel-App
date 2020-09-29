@@ -54,21 +54,18 @@
   <!-- Modal for showing favourites -->
   <div class="modal fade" id="favModal" tabindex="-1" aria-labelledby="favModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="favModalLabel">Favourites</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <div class="modal-content bg-dark">
+        <div class="modal-header bg-primary border-0">
+          <h5 class="modal-title  text-white" id="favModalLabel">Favourites</h5>
         </div>
         <div class="modal-body">
-          <ul class="list-group" id="favList"></ul>
+          <ul class="list-group bg-dark" id="favList"></ul>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer bg-dark border-0">
           <button type="button" class="btn btn-danger" id="btnRemoveAll">
             Remove All
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
             Close
           </button>
         </div>
@@ -79,13 +76,11 @@
   <!-- Modal to confirm save to favourites-->
   <div class="modal fade" id="favAdded" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body" id="favAddedText"></div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            OK
-          </button>
+      <div class="modal-content bg-dark text-white text-center">
+        <div class="modal-body">
+          <p class="pt-3" id="favAddedText"></p>
         </div>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>
@@ -93,13 +88,11 @@
   <!-- Modal for 404 handling-->
   <div class="modal fade" id="404modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body" id="404modalText"></div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            OK
-          </button>
+      <div class="modal-content bg-dark text-white text-center">
+        <div class="modal-body">
+          <p class="pt-3" id="404modalText"></p>
         </div>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>
