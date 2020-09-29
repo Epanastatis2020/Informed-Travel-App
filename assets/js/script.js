@@ -65,7 +65,7 @@ function getWeather() {
       // Creating elements to display retrieved API data, using Bootstrap to ensure they are responsive and look good in their container
       let newCard = $("<div>").attr(
         "class",
-        "d-flex col-md-3  flex-column justify-content-center align-items-center pt-3"
+        "d-flex col-md-3  flex-column justify-content-center align-items-center pt-3 weather-card"
       );
       let dateP = $("<h5>")
         .attr("id", "forecastDate")
@@ -150,28 +150,33 @@ function renderArticle(objArticle) {
   let strImageURL = objArticle.image;
   let strSource = objArticle.source.name;
 
-  // Build a new list item to render.
-  let newLI = $("<li>").addClass("media news-item");
+  // Build a new row to render.
+  let newRow = $("<div>").addClass("row news-item align-items-center px-3 py-3");
 
-  // Create the image element.
+  // Create the image column and element.
+  let imageCol = $("<div>").addClass("col-md-4 col-lg-3 text-center");
   let articleImage = $("<img>")
-    .addClass("mr-3 article-image")
+    .addClass("article-image")
     .attr("src", strImageURL);
+  imageCol.append(articleImage);
 
   // Create the article div with header/link
-  let articleDiv = $("<div>").addClass("media-body");
-  let articleHeader = $("<h5>").addClass("mt-0 mb-1");
+  let articleCol = $("<div>").addClass("col");
+  let articleHeader = $("<h5>").addClass("row article-header py-2 mb-0");
   let articleLink = $("<a>").attr("href", strURL).text(strTitle);
   articleHeader.append(articleLink); // Append the <a> tag to the header
 
+  // Create the article description.
+  let articleDesc = $("<p>").addClass("row article-desc py-2 mb-0").text(strDescription);
+
   // Append article header and description to the div.
-  articleDiv.append(articleHeader);
-  articleDiv.append(strDescription);
+  articleCol.append(articleHeader);
+  articleCol.append(articleDesc);
 
   // Append the image and article div to the new li then append to the list.
-  newLI.append(articleImage);
-  newLI.append(articleDiv);
-  $("ul.list-unstyled").append(newLI);
+  newRow.append(imageCol);
+  newRow.append(articleCol);
+  $("#newscontainer").append(newRow);
 }
 
 // Saves the current search to favourites in localstorage.
@@ -367,3 +372,4 @@ $("#btnRemoveAll").on("click", function (event) {
   $("#btnAddFavourite").removeClass("fas").addClass("far");
 
 });
+
