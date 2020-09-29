@@ -2,22 +2,6 @@ body {
   background-color: #1a1a1a;
 }
 
-/* #navbar {
-color: black;
-background-color: darkgrey;
-font-family: Tahoma, Verdana, Segoe, sans-serif;
-font-style: bold;
-}
-
-.nav-link {
-    color: black;
-    background-color: darkgrey;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    font-weight: bold;
-    float: left;
-
-} */
-
 #weathercontainer {
     background-color: darkgrey;
     width: 60%;
@@ -100,7 +84,6 @@ h1 {
 color: ghostwhite;
 text-align: center;
 size: 20px;
-font-family: Tahoma, Verdana, Segoe, sans-serif;
 font-weight: bold;
 }
 
