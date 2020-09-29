@@ -1,22 +1,6 @@
 body {
-  background-color: dimgrey;  
+  background-color: #1a1a1a;  
 }
-
-/* #navbar {
-color: black;
-background-color: darkgrey;
-font-family: Tahoma, Verdana, Segoe, sans-serif;
-font-style: bold;
-}
-
-.nav-link {
-    color: black;
-    background-color: darkgrey;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    font-weight: bold;
-    float: left;
-
-} */
 
 #weathercontainer {
     background-color: darkgrey;
@@ -64,7 +48,8 @@ max-width: 20%;
 }
 
 .article-image {
-    max-height: 50px;
+    max-height: 100px;
+    max-width: 100px;
 }
 
 .list-unstyled {
@@ -100,6 +85,6 @@ h1 {
 color: ghostwhite;
 text-align: center;
 size: 20px;
-font-family: Tahoma, Verdana, Segoe, sans-serif; 
+/* font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";  */
 font-weight: bold;
 }
