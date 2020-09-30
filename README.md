@@ -20,8 +20,6 @@ SO THAT I can be prepared upon arrival for both the environmental and social cli
 
 ## Summary of project
 
-```
-
 The app has been designed using bootstrap and bootswatch templates to ensure it remains dynamic and usable in different screen sizes (including mobile).
 
 It uses the Weatherbit.io and GNews APIs to pull back weather and news information relevant to the city name input by the user.
@@ -32,7 +30,6 @@ For the weather, four days of data are displayed including the current day. For 
 For both APIs, AJAX queries are used to interrogate the data sources and the required information is appended to the DOM using Javascript/Jquery.
 
 Error handling is present, alerting the user to an invalid or incorrect search term.
-```
 
 ## Built With
 
@@ -49,11 +46,11 @@ Error handling is present, alerting the user to an invalid or incorrect search t
 
 ## Screenshots
 
-![Landing Page](#)
+![Landing Page](https://user-images.githubusercontent.com/65388616/94657698-2e56cf80-0345-11eb-8469-58474a0885de.PNG)
 
-![Search Results](#)
+![Search Results](https://user-images.githubusercontent.com/65388616/94657686-272fc180-0345-11eb-9d29-af9933ed17ff.PNG)
 
-![Favourites Modal](#)
+![Favourites Modal](https://user-images.githubusercontent.com/65388616/94657652-17b07880-0345-11eb-9800-0ab159bf714a.PNG)
 
 ## Licence
 
@@ -67,7 +64,7 @@ Licensed under the MIT License
 
 ## Acknowledgements
 
-AskBCS was of assistance multiple times during this project, and I really appreciated their speedy responses to my questions.
+We would like to thank Klaus, Sandes and Ali for their assistance and guidance throughout this project.
 
 ## Authors
 
