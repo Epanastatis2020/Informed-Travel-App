@@ -57,3 +57,8 @@ h1 {
 #welcomeScreen {
     color: white;
 }
+
+#welcomeScreen .list-group-item {
+    background-color: #1a1a1a;
+    border: none;
+}
