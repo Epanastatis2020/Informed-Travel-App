@@ -2,29 +2,20 @@ body {
   background-color: #1a1a1a;
 }
 
-#weathercontainer {
-    background-color: darkgrey;
-    width: 60%;
-}
-
-#newscontainer {
-    background-color: darkgrey;
-    width: 60%;
-}
-
 @media only screen and (max-width: 600px) {
     #newscontainer {
       width: 100%;
     }
   }
 
-.article-image {
-    max-height: 5rem;
-}
 
 h1 {
     color: white;
     text-align: center;
+}
+
+.article-image {
+    max-height: 5rem;
 }
 
 .fa-star, .fa-star:hover {
@@ -47,4 +38,22 @@ h1 {
 
 .card-title {
     color: #1a1a1a;
+}
+
+#weathercontainer {
+    background-color: darkgrey;
+    width: 60%;
+}
+
+#newscontainer {
+    background-color: darkgrey;
+    width: 60%;
+}
+
+#resultsScreen, #welcomeScreen {
+    display: none;
+}
+
+#welcomeScreen {
+    color: white;
 }

@@ -1,11 +1,15 @@
 // Calling the weather API
 
 $(document).ready(function () {
+
+  showWelcomeScreen();
+
   $("#userInputForm").submit(function (event) {
     event.preventDefault();
     let input = $("#userInput").val();
     getWeather(input);
   });
+
 });
 
 // This pulls in the weather data as a function of the user input
@@ -104,15 +108,28 @@ function getWeather(searchTerm) {
 
     // capturing the country code which is used in the GNews API
     let catchCountry = forecasted.country_code;
-    getNews(catchCountry);
+    // getNews(catchCountry);
 
     // capturing the city name which is displayed as the title for the forecast
     let cityName = forecasted.city_name;
     // adding text to html element representing the title of the forecast
     $("#weathertitle").html(cityName + ", " + catchCountry);
 
-    // Call setFavStatus to show the right favourites icon next to the header.
-    setFavStatus($("#weathertitle").text())
+    // If showing the welcome screen, hide it and show the results screen and search bar.
+    if ($("#welcomeScreen").css("display").toLowerCase() === "block") {
+      $("#welcomeScreen").hide();
+      setSearchBar("on");
+      $("#resultsScreen").show();
+    }
+
+    // Check if the result is a favourite and call setFavStatus to show the right icon next to the header.
+    let strWeatherTitle = $("#weathertitle").text();
+    if (getFavourites().includes(strWeatherTitle)) {
+      setFavStatus("on");
+    }
+    else {
+      setFavStatus("off");
+    }
 
   });
 }
@@ -192,6 +209,9 @@ function saveFavourite(strDestination) {
   // Save the array back to localstorage.
   localStorage.setItem("travelFavourites", JSON.stringify(arrFavourites));
 
+  // Enable the favourites button.
+  $("#btnFavourites").prop("disabled", false)
+
   // Open modal to inform the user it has been saved.
   $("#favAddedText").text(`${strDestination} added to favourites`);
   $("#favAdded").modal("show");
@@ -260,34 +280,90 @@ function removeFavourite(strFavourite) {
   // Filter the array to remove the city.
   arrFavs = arrFavs.filter((item) => item !== strFavourite);
 
-  // If there's nothing left in the array, remove the entry from localstorage.
+  // If there's nothing left in the array, remove the entry from localstorage and disable favourites button.
   if (arrFavs.length === 0) {
     // Remove entry from localstorage.
     localStorage.removeItem("travelFavourites");
+    // Disable favourites button.
+    $("#btnFavourites").prop("disabled", true);
   } else {
     // Save back to localstorage.
     localStorage.setItem("travelFavourites", JSON.stringify(arrFavs));
   }
 }
 
-// Checks if the current search is in favourites and sets the star icon accordingly.
-function setFavStatus(strDestination) {
+// Sets the favourites star icon according to whether the current search is in favourites.
+function setFavStatus(state) {
 
-  // Get favourites from storage if they exist. If not, we will get an empty array.
-  let arrFavourites = getFavourites();
+  if (state === "on") {
 
-  if (arrFavourites.includes(strDestination) && $("#btnAddFavourite").hasClass("far")) {
+    // Change from an outline star to a solid star if necessary.
+    if ($("#btnAddFavourite").hasClass("far")) {
+      $("#btnAddFavourite").removeClass("far").addClass("fas");
+    }
 
-    // Change from an outline star to a solid star if present.
-    $("#btnAddFavourite").removeClass("far").addClass("fas");
+    // Set the tooltip.
+    $("#btnAddFavourite").attr("title", "Remove from favourites");
 
   }
-  else if (!arrFavourites.includes(strDestination) && $("#btnAddFavourite").hasClass("fas"))
+  else if (state === "off") {
 
-    // Change from solid to outline if not.
-    $("#btnAddFavourite").removeClass("fas").addClass("far");
+    // Change from solid to outline if necessary.
+    if ($("#btnAddFavourite").hasClass("fas")) {
+      $("#btnAddFavourite").removeClass("fas").addClass("far");
+    }
+
+    // Set the tooltip.
+    $("#btnAddFavourite").attr("title", "Add to favourites");
+
+  }
 
 }
+
+function showWelcomeScreen() {
+
+  // See if any favourites have been stored and if so, enable the favourites button.
+  if (getFavourites().length > 0) {
+    $("#btnFavourites").prop("disabled", false)
+  }
+
+  // Turn off the top search bar.
+  setSearchBar("off");
+
+  // Show the welcome screen.
+  $("#welcomeScreen").show();
+
+}
+
+function setSearchBar(state) {
+
+
+  if ((state === "on") && ($("#userInputForm").hasClass("invisible"))) {
+
+    $("#userInputForm").removeClass("invisible").addClass("visible");
+
+  }
+  else if ((state === "off") && ($("#userInputForm").hasClass("visible"))) {
+
+    $("#userInputForm").removeClass("visible").addClass("invisible");
+
+  }
+
+
+}
+
+// Listener for the form on the welcome screen.
+$("#welcomeForm").on("submit", function (event) {
+
+  event.preventDefault();
+
+  // Grab the user input.
+  let input = $("#welcomeUserInput").val().trim();
+
+  // Call getWeather to do the search.
+  getWeather(input);
+
+});
 
 // Listener for the add to favourites button.
 $("#btnAddFavourite").on("click", function (event) {
@@ -304,7 +380,7 @@ $("#btnAddFavourite").on("click", function (event) {
   if ($("#btnAddFavourite").hasClass("far")) {
 
     // Change from an outline star to a solid star.
-    $("#btnAddFavourite").removeClass("far").addClass("fas");
+    setFavStatus("on");
 
     // Call saveFavourite to save to localstorage.
     saveFavourite(strInput);
@@ -313,7 +389,7 @@ $("#btnAddFavourite").on("click", function (event) {
   else {
 
     // Change from a solid star to an outline star.
-    $("#btnAddFavourite").removeClass("fas").addClass("far")
+    setFavStatus("off");
 
     // Call removeFavourite to remove from favourites.
     removeFavourite(strInput);
@@ -351,13 +427,15 @@ $("#favList").on("click", "button", function (event) {
     // Call removeFavourite to remove the item from storage.
     removeFavourite(strFavName);
 
+    // Set the favourite star icon
+    setFavStatus("off");
+
     // Remove the item from the list.
     $(this).parent().remove();
 
-    // If it was the last one hide the remove all button and change the add favourite button.
+    // If it was the last one hide the remove all button, change the add favourite button and disable the favourites button.
     if ($(".fav-item").length === 0) {
       $("#btnRemoveAll").hide();
-      $("#btnAddFavourite").removeClass("fas").addClass("far");
     }
   }
 });
@@ -372,9 +450,9 @@ $("#btnRemoveAll").on("click", function (event) {
   // Remove items from the favourites screen list.
   $(".fav-item").remove();
 
-  // Hide the remove all button and change the add favourite button.
+  // Hide the remove all button, change the add favourite button and disable the favourites button.
   $("#btnRemoveAll").hide();
-  $("#btnAddFavourite").removeClass("fas").addClass("far");
+  setFavStatus("off");
+  $("#btnFavourites").prop("disabled", true);
 
 });
-
