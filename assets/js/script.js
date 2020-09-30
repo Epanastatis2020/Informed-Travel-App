@@ -108,7 +108,7 @@ function getWeather(searchTerm) {
 
     // capturing the country code which is used in the GNews API
     let catchCountry = forecasted.country_code;
-    // getNews(catchCountry);
+    getNews(catchCountry);
 
     // capturing the city name which is displayed as the title for the forecast
     let cityName = forecasted.city_name;
@@ -337,7 +337,6 @@ function showWelcomeScreen() {
 
 function setSearchBar(state) {
 
-
   if ((state === "on") && ($("#userInputForm").hasClass("invisible"))) {
 
     $("#userInputForm").removeClass("invisible").addClass("visible");
@@ -348,7 +347,6 @@ function setSearchBar(state) {
     $("#userInputForm").removeClass("visible").addClass("invisible");
 
   }
-
 
 }
 

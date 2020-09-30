@@ -66,3 +66,8 @@ h1 {
 #welcomeNewspaper {
     font-size: 4rem;
 }
+
+#welcomeCard {
+    background-color: #1a1a1a;
+    max-width: 35rem;
+}

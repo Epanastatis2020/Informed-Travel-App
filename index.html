@@ -43,29 +43,34 @@
 
 
   <!-- Div for showing welcome screen. Shown on page load. -->
-  <div class="container px-5" id="welcomeScreen">
+  <div class="container" id="welcomeScreen">
 
-    <h1 class="display-4 text-center pt-5 mb-4">Informed Traveller</h1>
+    <h1 class="display-4 text-center py-5">Informed Traveller</h1>
 
-    <p>Welcome to the Informed Traveller app! To get started, enter your destination in the search box below
-      and hit the search button.</p>
-    <p>For best results, include a city and a country in your search (two letter country
-      abbreviations can also be used). Be sure to include the separating comma. For example:</p>
+    <div class="card border border-white rounded mx-auto mb-5" id="welcomeCard">
+      <div class="card-body">
 
-    <ul class="list-group mb-4">
-      <li class="list-group-item">London, England</li>
-      <li class="list-group-item">Melbourne, AU</li>
-      <li class="list-group-item">Los Angeles, Mexico</li>
-    </ul>
+        <p>Welcome to the Informed Traveller app! To get started, enter your destination in the search box below
+          and hit the search button.</p>
+        <p>For best results, include a city and a country in your search (two letter country
+          abbreviations can also be used). Be sure to include the separating comma. For example:</p>
 
+        <ul class="list-group">
+          <li class="list-group-item">London, England</li>
+          <li class="list-group-item">Melbourne, AU</li>
+          <li class="list-group-item">Los Angeles, Mexico</li>
+        </ul>
 
-    <div class="row mb-5">
-      <form class="form-inline mx-auto" id="welcomeForm">
-        <input class="form-control mt-2 mt-md-0" type="search" placeholder="City, Country" aria-label="Search"
-          id="welcomeUserInput" />
-        <button class="btn bg-dark ml-0 ml-sm-2 mt-2 mt-md-0" type="submit"><i
-            class="fas fa-search text-white"></i></button>
-      </form>
+        <div class="row text-center py-4">
+          <form class="form-inline mx-auto" id="welcomeForm">
+            <input class="form-control mt-2 mt-md-0" type="search" placeholder="City, Country" aria-label="Search"
+              id="welcomeUserInput" />
+            <button class="btn bg-dark ml-0 ml-sm-2 mt-2 mt-md-0" type="submit"><i
+                class="fas fa-search text-white"></i></button>
+          </form>
+        </div>
+
+      </div>
     </div>
 
     <div class="row pt-5">
