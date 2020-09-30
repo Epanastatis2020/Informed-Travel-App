@@ -22,41 +22,83 @@
 
 <body>
   <!-- Navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <i class="fa fa-newspaper-o" style="font-size: 48px; color: white"></i>
-    <a class="navbar-brand" href="#">Informed Traveller</a>
+    <a class="navbar-brand" href="#"><i class="far fa-newspaper text-white mr-2"></i>Informed Traveller</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      <form class="form-inline" id="userInputForm">
-        <input class="form-control mr-sm-2" type="search" placeholder="Enter City Name" aria-label="Search"
+      <form class="form-inline ml-auto invisible" id="userInputForm">
+        <input class="form-control mt-2 mt-md-0" type="search" placeholder="City, Country" aria-label="Search"
           id="userInput" />
-        <button class="btn btn-primary mr-2" type="submit"><i class="fas fa-search"></i></button>
+        <button class="btn btn-primary ml-0 ml-sm-2 mt-2 mt-md-0" type="submit"><i class="fas fa-search"></i></button>
       </form>
-      <button class="btn btn-primary" id="btnFavourites">Favourites</button>
-
+      <button class="btn btn-primary ml-0 ml-md-2 mt-2 mt-md-0" id="btnFavourites" disabled>Favourites</button>
     </div>
+
   </nav>
 
-  <!-- First Container for Weather -->
-  <div class="container pt-5 mb-5">
-    <h1>
-      <span id="weathertitle"></span><button class="btn far fa-star pt-0" id="btnAddFavourite"></button>
+
+  <!-- Div for showing welcome screen. Shown on page load. -->
+  <div class="container" id="welcomeScreen">
+
+    <h1 class="display-4 text-center py-5">Informed Traveller</h1>
+
+    <div class="card border border-white rounded mx-auto mb-5" id="welcomeCard">
+      <div class="card-body">
+
+        <p>Welcome to the Informed Traveller app! To get started, enter your destination in the search box below
+          and hit the search button.</p>
+        <p>For best results, include a city and a country in your search (two letter country
+          abbreviations can also be used). Be sure to include the separating comma. For example:</p>
+
+        <ul class="list-group">
+          <li class="list-group-item">London, England</li>
+          <li class="list-group-item">Melbourne, AU</li>
+          <li class="list-group-item">Los Angeles, Mexico</li>
+        </ul>
+
+        <div class="row text-center py-4">
+          <form class="form-inline mx-auto" id="welcomeForm">
+            <input class="form-control mt-2 mt-md-0" type="search" placeholder="City, Country" aria-label="Search"
+              id="welcomeUserInput" />
+            <button class="btn bg-dark ml-0 ml-sm-2 mt-2 mt-md-0" type="submit"><i
+                class="fas fa-search text-white"></i></button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row pt-5">
+      <div class="col text-center">
+        <span class="far fa-newspaper text-info" id="welcomeNewspaper"></span>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Div for showing search results. Hidden until search is complete. -->
+  <div id="resultsScreen">
+
+    <!-- First Container for Weather -->
+    <h1 class="pt-5 mb-5">
+      <span id="weathertitle"></span><button class="btn far fa-star pt-0" id="btnAddFavourite" data-toggle="tooltip"
+        data-placement="right" title="Add to favourites"></button>
     </h1>
-  </div>
-  <div class="container-fluid" id="weathercontainer"></div>
+    <div class="container-fluid" id="weathercontainer"></div>
 
-  <!-- Second Container for News -->
-  <h1 class="pt-5 mb-5">Top Stories</h1>
-  <div class="container-fluid mb-5" id="newscontainer">
+
+    <!-- Second Container for News -->
+    <h1 class="pt-5 mb-5">Top Stories</h1>
+    <div class="container-fluid mb-5" id="newscontainer"></div>
 
   </div>
+
 
   <!-- Modal for showing favourites -->
   <div class="modal fade" id="favModal" tabindex="-1" aria-labelledby="favModalLabel" aria-hidden="true">
@@ -80,6 +122,7 @@
     </div>
   </div>
 
+
   <!-- Modal to confirm save to favourites-->
   <div class="modal fade" id="favAdded" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -92,6 +135,7 @@
     </div>
   </div>
 
+
   <!-- Modal for 404 handling-->
   <div class="modal fade" id="404modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -103,6 +147,7 @@
       </div>
     </div>
   </div>
+
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
