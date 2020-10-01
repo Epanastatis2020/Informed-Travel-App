@@ -15,9 +15,6 @@ $(document).ready(function () {
 // This pulls in the weather data as a function of the user input
 
 function getWeather(searchTerm) {
-  // Preparing the weather div container
-
-  $("#weathercontainer").empty();
 
   // Creating variables necessary for API call (mostly constructing the queryURL)
 
@@ -45,6 +42,10 @@ function getWeather(searchTerm) {
     if (!response) {
       return;
     }
+
+    // Preparing the weather div container
+
+    $("#weathercontainer").empty();
 
     let forecasted = response;
 
